@@ -20,6 +20,7 @@ public class TrimmedAnnotationBeanPostProcessor implements BeanPostProcessor {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(aClass);
         enhancer.setInterfaces(aClass.getInterfaces());
+
         MethodInterceptor methodInterceptor = (Object obj, Method method, Object[] args, MethodProxy methodProxy) -> {
             trimMethodStringArgument(args);
             return method.getReturnType().equals(String.class) ? methodProxy.invokeSuper(obj, args).toString().trim()
